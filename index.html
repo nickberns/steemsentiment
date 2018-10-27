@@ -1,0 +1,50 @@
+<html>
+    <head>
+    <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
+        <script>
+          console.log('hello');
+          // steem.api.setOptions({ url: 'wss://rpc.buildteam.io' });
+          // steem.api.streamTransactions('head',(error, result) => {
+          //   let txType = result.operations[0][0]
+          //   let txData = result.operations[0][1]
+          //
+          const ACCOUNT_NAME = 'cryptonik';
+          const WALLET_FILTER = 'transfer';
+            steem.api.getAccountHistory(ACCOUNT_NAME,-1, 50, (err, result) =>{
+              let transfers = result.filter( tx => tx[1].op[0] === WALLET_FILTER)
+              displayTransactions(transfers)
+            });
+
+            function displayTransactions(transactions){
+              transactions.forEach((tx) =>{
+                let transfer = tx[1].op[1]
+                let template =
+                `<tr>
+                  <td>${trasfer.from}</td>
+                  <td>${transfer.to}</td>
+                  <td>${transfer.amount}</td>
+                  <td>${transfer.memo}</td>
+                  </tr>`
+                  $('tbody').prepend(template)
+              });
+
+            }
+
+
+
+            // if(txType == 'comment'){
+            //   console.log(txData.body + "\n*****************************************\n")
+            //   ary.push(txData.body);
+            //   //document.getElementById("demo").innerHTML = txData.body;
+            // }
+            // for (i=0; i<ary.length; i++){
+            //   document.getElementById("demo").innerHTML = ary[i];
+            // }
+
+
+      </script>
+    </head>
+    <body>
+      <p id="demo"></p>
+    </body>
+</html>
