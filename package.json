@@ -1,0 +1,28 @@
+{
+  "name": "lets-scrape",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "mssql": "^4.2.2",
+    "request": "^2.88.0",
+    "steemjs": "^1.0.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickberns/steemsentiment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nickberns/steemsentiment/issues"
+  },
+  "homepage": "https://github.com/nickberns/steemsentiment#readme",
+  "description": ""
+}
