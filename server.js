@@ -26,9 +26,10 @@ app.get('/', function (req, res) {
         request.query('SELECT name, vesting_withdraw_rate, next_vesting_withdrawal FROM dbo.Accounts WHERE name=\'netuoso\' OR name=\'dan\' OR name=\'ned\' OR name=\'dantheman\' OR name=\'mrdelegation\' OR name=\'steem\' OR name=\'bittrex\' OR name=\'poloniex\' OR name=\'freedom\' OR name=\'blocktrades\' OR name=\'val-a\' OR name=\'mottler\' OR name=\'ben\' OR name=\'databass\' OR name=\'hendrikgrote\' OR name=\'jamesc\' OR name=\'michael-b\' OR name=\'val-b\' OR name=\'xeldal\' OR name=\'roadscape\' OR name=\'fyrstikken\' OR name=\'riverhead\'', function (err, recordset) {
             
             if (err) console.log(err)
-
+		var data = recordset;	
             // send records as a response
-            res.send(recordset);
+            res.send(data[0]);
+		sql.close();
             
         });
     });
@@ -36,5 +37,5 @@ app.get('/', function (req, res) {
 
 var server = app.listen(5000, function () {
     console.log('Server is running..');
-    console.log(process.env.STEEMPASSWORD);
+    console.log(typeof data);
 });
