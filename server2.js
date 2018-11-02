@@ -1,7 +1,24 @@
 var express = require('express');
+const hbs = require('hbs');
 var app = express();
 var dotenv= require('dotenv').config();
 var text;
+
+var app = express();
+
+hbs.registerPartials(__dirname + '/views/partials');
+app.set('view engine', 'hbs');
+
+app.get('/chart', (req, res) => {
+  res.render('graphic.hbs', {
+    pageTitle: 'Chart Page',
+  });
+});
+app.get('/don', (req, res) => {
+  res.render('doughnut.hbs', {
+    pageTitle: 'Chart Page',
+  });
+});
 app.get('/', function (req, res) {
 
   var sql = require('mssql');
@@ -38,7 +55,7 @@ app.get('/', function (req, res) {
 
                         for (i=0; i<data.length; i++){
                           console.log(data[i].name, data[i].balance, data[i].sbd_balance, data[i].vesting_shares, data[i].to_withdraw, data[i].vesting_withdraw_rate, data[i].next_vesting_withdrawal);
-                         text +="<tr>" + "<td>" + data[i].name + "</td><td>" + data[i].balance + "</td><td>" + data[i].sbd_balance + "</td><td>" + vestToSP(data[i].vesting_shares) + "</td><td>" + data[i].to_withdraw + "</td><td>" + powerDown(data[i].vesting_withdraw_rate) + "</td><td>" + data[i].next_vesting_withdrawal + "</td></tr>";
+                         text +="<tr>" + "<td>" + data[i].name + "</td><td>" + data[i].balance + "</td><td>" + data[i].sbd_balance + "</td><td>" + vestToSP(parseInt(data[i].vesting_shares)) + "</td><td>" + data[i].to_withdraw + "</td><td>" + data[i].vesting_withdraw_rate + "</td><td>" + data[i].next_vesting_withdrawal + "</td></tr>";
                          }
                          text +="</table">
                        res.send(text);
@@ -65,6 +82,6 @@ app.get('/', function (req, res) {
 
 });
 
-var server = app.listen(5000, function () {
+var server = app.listen(3000, function () {
     console.log('Server is running..');
 });
